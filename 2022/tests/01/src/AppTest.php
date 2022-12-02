@@ -9,6 +9,10 @@ use function PHPUnit\Framework\assertSame;
 
 class AppTest extends TestCase
 {
+    const TEST_FILE_ONE = __DIR__ . '/testFile.csv';
+    const TEST_FILE_TWO = __DIR__ . '/testFile2.csv';
+    const REAL_FILE = __DIR__ . '/../../../01/data/input.csv';
+
     public function testFileDoesNotExist(): void
     {
         $fileName = __DIR__.'/testFileThatDoesNotExist.csv';
@@ -20,7 +24,7 @@ class AppTest extends TestCase
 
     public function testReturnsCorrectNumberOfItems(): void
     {
-        $fileName = __DIR__.'/testFile.csv';
+        $fileName = self::TEST_FILE_ONE;
 
         $app = new App($fileName);
         self::assertCount(2, $app->getFileContentsAsList());
@@ -29,7 +33,7 @@ class AppTest extends TestCase
 
     public function testGetContents(): void
     {
-        $fileName = __DIR__.'/testFile.csv';
+        $fileName = self::TEST_FILE_ONE;
         $expectedContent = [
             ['234', '432', '235'],
             [ '3423', '5453', '4334'],
@@ -41,7 +45,7 @@ class AppTest extends TestCase
 
     public function testItWillFindBiggestBlockSum(): void
     {
-        $fileName = __DIR__.'/testFile.csv';
+        $fileName = self::TEST_FILE_ONE;
 
         $app = new App($fileName);
         self::assertSame(13210, $app->getTopXResults(1)[0]);
@@ -49,7 +53,7 @@ class AppTest extends TestCase
 
     public function testItWillFindBiggestBlockSumFromRealFile(): void
     {
-        $fileName = __DIR__.'/../../../01/data/input.csv';
+        $fileName = self::REAL_FILE;
 
         $app = new App($fileName);
         self::assertSame(68467, $app->getTopXResults(1)[0]);
@@ -60,7 +64,7 @@ class AppTest extends TestCase
      */
     public function testResultArrayWillBeReturned(): void
     {
-        $fileName = __DIR__.'/testFile.csv';
+        $fileName = self::TEST_FILE_ONE;
 
         $app = new App($fileName);
 
@@ -69,7 +73,7 @@ class AppTest extends TestCase
 
     public function testGetResultListSortedDescending(): void
     {
-        $fileName = __DIR__.'/testFile2.csv';
+        $fileName = self::TEST_FILE_TWO;
 
         $app = new App($fileName);
 
@@ -78,7 +82,7 @@ class AppTest extends TestCase
 
     public function testGetTopThree(): void
     {
-        $fileName = __DIR__.'/testFile2.csv';
+        $fileName = self::TEST_FILE_TWO;
 
         $app = new App($fileName);
 
@@ -87,7 +91,7 @@ class AppTest extends TestCase
 
     public function testGetTopTwo(): void
     {
-        $fileName = __DIR__.'/testFile2.csv';
+        $fileName = self::TEST_FILE_TWO;
 
         $app = new App($fileName);
 
@@ -96,7 +100,7 @@ class AppTest extends TestCase
 
     public function testGetTotalTopThreeFromRealFile(): void
     {
-        $fileName = __DIR__.'/../../../01/data/input.csv';
+        $fileName = self::REAL_FILE;
 
         $app = new App($fileName);
 

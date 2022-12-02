@@ -1,0 +1,19 @@
+{
+    "name": "christofer/adventofcode2022",
+    "description": "Advent of code",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Christofer\\Adventofcode2022\\": "01/src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Christofer Lindkvist",
+            "email": "christofer.lindkvist@evimeria.se"
+        }
+    ]
+}

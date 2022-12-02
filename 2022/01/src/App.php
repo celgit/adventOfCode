@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Christofer\Adventofcode2022;
 
-use PHPUnit\Exception;
+
+use Exception;
 
 class App
 {
@@ -22,7 +23,7 @@ class App
         $this->openFile();
     }
 
-    final public function getFileContentsAsList(): array
+    public function getFileContentsAsList(): array
     {
         $result = [];
 
@@ -36,18 +37,18 @@ class App
         return $result;
     }
 
-    final public function getBiggestBlockSum(): int
+    public function getBiggestBlockSum(): int
     {
         $list = $this->getFileContentsAsList();
-        $biggest = 0;
+        $highestSumSoFar = 0;
         foreach ($list as $elf) {
-            $elfsum = array_sum($elf);
-            if ($elfsum > $biggest) {
-                $biggest = $elfsum;
+            $sumPerElf = array_sum($elf);
+            if ($sumPerElf > $highestSumSoFar) {
+                $highestSumSoFar = $sumPerElf;
             }
         }
 
-        return $biggest;
+        return $highestSumSoFar;
     }
 
     private function openFile(): void
@@ -56,15 +57,33 @@ class App
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     private function fileExists(): void
     {
         if (!file_exists($this->fileName)) {
-            throw new \Exception();
+            throw new Exception();
         }
     }
 
+    public function getAllResults(): array
+    {
+        $list = $this->getFileContentsAsList();
+        $resultList = [];
 
+        foreach ($list as $elf) {
+            $resultList[] = array_sum($elf);
+        }
+
+        return $resultList;
+    }
+
+    public function getAllResultsSortedDescending(): array
+    {
+        $resultList = $this->getAllResults();
+        rsort($resultList);
+
+        return $resultList;
+    }
 }
 

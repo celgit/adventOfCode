@@ -9,7 +9,7 @@ use function PHPUnit\Framework\assertSame;
 
 class AppTest extends TestCase
 {
-    final public function testFileDoesNotExist(): void
+    public function testFileDoesNotExist(): void
     {
         $fileName = __DIR__.'/testFileThatDoesNotExist.csv';
 
@@ -18,7 +18,7 @@ class AppTest extends TestCase
         new App($fileName);
     }
 
-    final public function testReturnsCorrectNumberOfItems(): void
+    public function testReturnsCorrectNumberOfItems(): void
     {
         $fileName = __DIR__.'/testFile.csv';
 
@@ -27,7 +27,7 @@ class AppTest extends TestCase
 
     }
 
-    final public function testGetContents(): void
+    public function testGetContents(): void
     {
         $fileName = __DIR__.'/testFile.csv';
         $expectedContent = [
@@ -39,7 +39,7 @@ class AppTest extends TestCase
         self::assertSame($expectedContent, $app->getFileContentsAsList());
     }
 
-    final public function testItWillFindBiggestBlockSum(): void
+    public function testItWillFindBiggestBlockSum(): void
     {
         $fileName = __DIR__.'/testFile.csv';
 
@@ -47,16 +47,32 @@ class AppTest extends TestCase
         self::assertSame(13210, $app->getBiggestBlockSum());
     }
 
-    final public function testItWillFindBiggestBlockSumFromRealFile(): void
+    public function testItWillFindBiggestBlockSumFromRealFile(): void
     {
         $fileName = __DIR__.'/../../../01/data/input.csv';
 
         $app = new App($fileName);
         self::assertSame(68467, $app->getBiggestBlockSum());
     }
-//
-//    final public function testResultArrayWillBeReturned(): void
-//    {
-//        $fileName
-//    }
+
+    /**
+     * @throws Exception
+     */
+    public function testResultArrayWillBeReturned(): void
+    {
+        $fileName = __DIR__.'/testFile.csv';
+
+        $app = new App($fileName);
+
+        self::assertSame([901, 13210], $app->getAllResults());
+    }
+
+    public function testGetResultListSortedDescending()
+    {
+        $fileName = __DIR__.'/testFile2.csv';
+
+        $app = new App($fileName);
+
+        self::assertSame([464849, 13210, 10564, 901, 385, 59], $app->getAllResultsSortedDescending());
+    }
 }

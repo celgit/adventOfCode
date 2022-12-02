@@ -37,34 +37,6 @@ class App
         return $result;
     }
 
-    public function getBiggestBlockSum(): int
-    {
-        $list = $this->getFileContentsAsList();
-        $highestSumSoFar = 0;
-        foreach ($list as $elf) {
-            $sumPerElf = array_sum($elf);
-            if ($sumPerElf > $highestSumSoFar) {
-                $highestSumSoFar = $sumPerElf;
-            }
-        }
-
-        return $highestSumSoFar;
-    }
-
-    private function openFile(): void
-    {
-        $this->handle = fopen($this->fileName, 'rb');
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function fileExists(): void
-    {
-        if (!file_exists($this->fileName)) {
-            throw new Exception();
-        }
-    }
 
     public function getAllResults(): array
     {
@@ -84,6 +56,28 @@ class App
         rsort($resultList);
 
         return $resultList;
+    }
+
+    public function getTopXResults(int $numberOfResults): array
+    {
+        $resultList = $this->getAllResultsSortedDescending();
+
+        return array_slice($resultList, 0, $numberOfResults);
+    }
+
+    private function openFile(): void
+    {
+        $this->handle = fopen($this->fileName, 'rb');
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function fileExists(): void
+    {
+        if (!file_exists($this->fileName)) {
+            throw new Exception();
+        }
     }
 }
 

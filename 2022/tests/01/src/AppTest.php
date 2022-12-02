@@ -44,7 +44,7 @@ class AppTest extends TestCase
         $fileName = __DIR__.'/testFile.csv';
 
         $app = new App($fileName);
-        self::assertSame(13210, $app->getBiggestBlockSum());
+        self::assertSame(13210, $app->getTopXResults(1)[0]);
     }
 
     public function testItWillFindBiggestBlockSumFromRealFile(): void
@@ -52,7 +52,7 @@ class AppTest extends TestCase
         $fileName = __DIR__.'/../../../01/data/input.csv';
 
         $app = new App($fileName);
-        self::assertSame(68467, $app->getBiggestBlockSum());
+        self::assertSame(68467, $app->getTopXResults(1)[0]);
     }
 
     /**
@@ -67,12 +67,30 @@ class AppTest extends TestCase
         self::assertSame([901, 13210], $app->getAllResults());
     }
 
-    public function testGetResultListSortedDescending()
+    public function testGetResultListSortedDescending(): void
     {
         $fileName = __DIR__.'/testFile2.csv';
 
         $app = new App($fileName);
 
         self::assertSame([464849, 13210, 10564, 901, 385, 59], $app->getAllResultsSortedDescending());
+    }
+
+    public function testGetTopThree(): void
+    {
+        $fileName = __DIR__.'/testFile2.csv';
+
+        $app = new App($fileName);
+
+        self::assertSame([464849, 13210, 10564], $app->getTopXResults(3));
+    }
+
+    public function testGetTopTwo(): void
+    {
+        $fileName = __DIR__.'/testFile2.csv';
+
+        $app = new App($fileName);
+
+        self::assertSame([464849, 13210], $app->getTopXResults(2));
     }
 }

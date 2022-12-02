@@ -93,4 +93,13 @@ class AppTest extends TestCase
 
         self::assertSame([464849, 13210], $app->getTopXResults(2));
     }
+
+    public function testGetTotalTopThreeFromRealFile(): void
+    {
+        $fileName = __DIR__.'/../../../01/data/input.csv';
+
+        $app = new App($fileName);
+
+        self::assertSame(203420, array_sum($app->getTopXResults(3)));
+    }
 }

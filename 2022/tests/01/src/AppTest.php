@@ -49,9 +49,14 @@ class AppTest extends TestCase
 
     final public function testItWillFindBiggestBlockSumFromRealFile(): void
     {
-        $fileName = __DIR__.'/input.csv';
+        $fileName = __DIR__.'/../../../01/data/input.csv';
 
         $app = new App($fileName);
         self::assertSame(68467, $app->getBiggestBlockSum());
     }
+//
+//    final public function testResultArrayWillBeReturned(): void
+//    {
+//        $fileName
+//    }
 }

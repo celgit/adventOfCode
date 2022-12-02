@@ -10,11 +10,11 @@ class App
 {
 
     private string $fileName;
-    /**
-     * @var false|resource
-     */
     private $handle;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct(string $fileName)
     {
         $this->fileName = $fileName;
@@ -22,17 +22,7 @@ class App
         $this->openFile();
     }
 
-    final public function calcKcalSum(array $arrayOfNum): int
-    {
-        return 666;
-    }
-
-    final public function readFile(): string
-    {
-        return 'hejsvejs';
-    }
-
-    final public function getFileContentsAsList()
+    final public function getFileContentsAsList(): array
     {
         $result = [];
 
@@ -46,7 +36,7 @@ class App
         return $result;
     }
 
-    public function getBiggestBlockSum(): int
+    final public function getBiggestBlockSum(): int
     {
         $list = $this->getFileContentsAsList();
         $biggest = 0;
@@ -62,12 +52,10 @@ class App
 
     private function openFile(): void
     {
-        $this->handle = fopen($this->fileName, 'r');
+        $this->handle = fopen($this->fileName, 'rb');
     }
 
     /**
-     * @param string $fileName
-     * @return void
      * @throws \Exception
      */
     private function fileExists(): void

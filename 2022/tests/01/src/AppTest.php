@@ -9,37 +9,13 @@ use function PHPUnit\Framework\assertSame;
 
 class AppTest extends TestCase
 {
-
-    final public function testCalcKcalSumOfArray(): void
-    {
-        $num1 = 111;
-        $num2 = 222;
-        $num3 = 333;
-
-        $arrayOfNum = [$num1, $num2, $num3];
-
-        $fileName = __DIR__.'/testFile.csv';
-        $app = new App($fileName);
-
-        self::assertSame(666, $app->calcKcalSum($arrayOfNum));
-    }
-
-    final public function testFileNotEmpty(): void
-    {
-        $fileName = __DIR__.'/testFile.csv';
-        $app = new App($fileName);
-
-        self::assertNotEmpty($app->readFile());
-    }
-
     final public function testFileDoesNotExist(): void
     {
         $fileName = __DIR__.'/testFileThatDoesNotExist.csv';
 
-        self::expectException(Exception::class);
+        $this->expectException(Exception::class);
 
-        $app = new App($fileName);
-
+        new App($fileName);
     }
 
     final public function testReturnsCorrectNumberOfItems(): void
